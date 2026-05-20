@@ -46,7 +46,7 @@ next-env.d.ts
 /features
 
 # next.js
-/.next/
+.next/
 /out/
 
 

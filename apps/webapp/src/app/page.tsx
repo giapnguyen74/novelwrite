@@ -157,7 +157,7 @@ function NovelDashboard({ persistence }: { persistence: ReturnType<typeof useNov
     } catch {
       return defaults;
     }
-  }, [activeProject?.projectMd]);
+  }, [activeProject]);
 
   const updateTypographySettings = useCallback((updates: Partial<typeof typographySettings>) => {
     if (!activeProject) return;

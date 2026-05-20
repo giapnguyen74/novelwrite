@@ -9,6 +9,8 @@
     "dev": "npm run dev -w webapp",
     "dev:webapp": "npm run dev -w webapp",
     "build:webapp": "npm run build -w webapp",
+    "build": "npm run build --workspaces",
+    "lint": "npm run lint --workspaces",
     "start:webapp": "npm run start -w webapp",
     "test": "npm test --workspaces"
   }
