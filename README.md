@@ -2,31 +2,6 @@
 
 Welcome to **NovelWrite**, a premium, highly immersive novel-writing ecosystem featuring a visual three-column Next.js web application editor and a robust terminal-based writing CLI. Both applications consume the exact same platform-independent AI agent core, delivering a fully localized, context-aware prose assistant.
 
----
-
-## 🗺️ Architecture
-
-`NovelWrite` is structured as a type-safe npm workspaces monorepo:
-
-```mermaid
-graph TD
-    A["apps/novelwrite-cli"] -->|Imports| C["@novelwrite/novel-agent"]
-    B["apps/webapp Next.js"] -->|Imports| C
-    
-    C -->|ProjectStorage Interface| D["Storage Abstraction"]
-    C -->|LLMClient Interface| E["LLM Abstraction"]
-    
-    A -->|Implements DirectoryProjectStorage| D
-    B -->|Implements LocalStorageProjectStorage| D
-```
-
-### 1. 🧠 [`packages/novel-agent`](./packages/novel-agent) (AI Engine Core)
-The core library that handles AI prompt construction, dynamic context parsing, and structured prose generation:
-*   **Decoupled Storage (`ProjectStorage`)**: Dual filesystem adapter interface to read/write files either in Node (CLI console) or local storage (React browser).
-*   **Dynamic Language Packs**: Keeps dynamic instructions, narrative models, and speech guides localized inside JSON files under [`packages/novel-agent/src/language/packs/`](./packages/novel-agent/src/language/packs/).
-
-### 2. 🎨 [`apps/webapp`](./apps/webapp) (Next.js Rich-Text Workspace Dashboard)
-A responsive visual editor incorporating customizable Tiptap nodes, real-time word-counting, and a comprehensive Story Bible.
 
 ---
 
@@ -37,8 +12,6 @@ When launched with no prior project data, `NovelWrite` triggers an elegant setup
 
 *   **Synchronization:** Modifying details inside the Settings Modal instantly regenerates and updates `Project.json` in the Story Bible Workspace, maintaining a cohesive writing environment.
 
-#### **Onboarding & Configuration Flow:**
-![Onboarding Flow](./assets/onboarding_flow.webp)
 
 ---
 
