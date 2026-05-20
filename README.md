@@ -1,8 +1,12 @@
-# ✍️ NovelWrite: Premium AI Novel-Writing Ecosystem
+# ✍️ NovelWrite: Local-First, Privacy-Focused AI Novel Editor
 
-Welcome to **NovelWrite**, a premium, highly immersive ecosystem designed for authors who write complex stories, novels, or scripts. NovelWrite features a state-of-the-art visual editor web application built on Next.js and Tiptap, backed by a platform-independent AI Agent engine. 
+Welcome to **NovelWrite**, a premium, feature-rich **local-first** AI novel writing app designed for authors who write complex stories, novels, or scripts. NovelWrite combines ultimate creative privacy with advanced writing assistance by storing all files in your local browser sandbox and letting you connect to the AI model of your choice.
 
-NovelWrite dynamically builds prompt contexts from an author's **Story Bible**, allowing for highly contextual prose generation, voice extraction, and story continuity auditing.
+### 🛡️ Privacy & Control First
+*   **Truly Local Storage**: Your manuscripts, Story Bibles, outlines, and snapshot histories are stored completely within your browser's `localStorage`. No remote servers, no databases, and no tracking. You own your data entirely.
+*   **User-Defined AI (Bring Your Own LLM)**: You have complete freedom of choice. Connect NovelWrite to any OpenAI-compatible API endpoint—whether that's a local model running on your own machine via **Ollama** or **LM Studio**, or cloud providers like **OpenRouter**, **DeepSeek**, or **OpenAI**. 
+
+NovelWrite dynamically compiles your local **Story Bible** directly into the context window, giving your chosen AI model deep, localized awareness of your characters, writing styles, and timeline continuity.
 
 ---
 
