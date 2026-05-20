@@ -1,14 +1,12 @@
-# NovelWrite Monorepo
+# ✍️ NovelWrite
 
-Welcome to **NovelWrite**, a premium, modular novel-writing ecosystem that couples a beautiful visual Next.js editor with a robust terminal-based writing agent.
-
-This repository is structured as a type-safe npm workspaces monorepo, allowing the browser webapp and terminal CLI to consume the exact same platform-independent AI agent core.
+Welcome to **NovelWrite**, a premium, highly immersive novel-writing ecosystem featuring a visual three-column Next.js web application editor and a robust terminal-based writing CLI. Both applications consume the exact same platform-independent AI agent core, delivering a fully localized, context-aware prose assistant.
 
 ---
 
 ## 🗺️ Monorepo Architecture
 
-The workspace is divided into three focused layers:
+`NovelWrite` is structured as a type-safe npm workspaces monorepo:
 
 ```mermaid
 graph TD
@@ -22,85 +20,101 @@ graph TD
     B -->|Implements LocalStorageProjectStorage| D
 ```
 
-### 1. [`packages/novel-agent`](./packages/novel-agent) (AI Engine Core)
-The platform-independent core library that handles AI prompt construction, context priority compilation, structured LLM generation, output postprocessors, and transactional patching.
-*   **Decoupled Storage (`ProjectStorage`)**: Can write to Node's filesystem (using `DirectoryProjectStorage`) or browser local storage (using `MemoryProjectStorage`).
-*   **Dynamic Language Packs**: Keeps prompt tasks, instructions, and rules completely localized inside dynamic JSON files under [`packages/novel-agent/src/language/packs/`](./packages/novel-agent/src/language/packs/).
+### 1. 🧠 [`packages/novel-agent`](./packages/novel-agent) (AI Engine Core)
+The core library that handles AI prompt construction, dynamic context parsing, and structured prose generation:
+*   **Decoupled Storage (`ProjectStorage`)**: Dual filesystem adapter interface to read/write files either in Node (CLI console) or local storage (React browser).
+*   **Dynamic Language Packs**: Keeps dynamic instructions, narrative models, and speech guides localized inside JSON files under [`packages/novel-agent/src/language/packs/`](./packages/novel-agent/src/language/packs/).
 
-### 2. [`apps/novelwrite-cli`](./apps/novelwrite-cli) (Terminal CLI Writing REPL)
-An interactive terminal REPL shell to plan, highlight, rewrite, and write stories with AI assistance directly from your console.
-*   Features: Live directory parsing, context metrics, multiline pastes (`select paste`), terminal highlights, and a structured `y / n / prompt` patch transaction flow.
+### 2. 💻 [`apps/novelwrite-cli`](./apps/novelwrite-cli) (Interactive Writing CLI REPL)
+An interactive console shell enabling authors to query styles, rewrite selected paragraphs, and prompt the AI writer directly from their terminal.
 
-### 3. [`apps/webapp`](./apps/webapp) (Next.js Dashboard Editor)
-A responsive, high-performance visual dashboard that brings the power of the `@novelwrite/novel-agent` prompts into a premium three-column rich-text editing experience using Tiptap.
+### 3. 🎨 [`apps/webapp`](./apps/webapp) (Next.js Rich-Text Workspace Dashboard)
+A responsive visual editor incorporating customizable Tiptap nodes, real-time word-counting, and a comprehensive Story Bible.
+
+---
+
+## ✨ Flagship Visual Features
+
+### 1. 🚀 First-Time Project Onboarding & Settings
+When launched with no prior project data, `NovelWrite` triggers an elegant setup dialog immediately on startup. Authors can initialize their work by defining the **Story Title, Author Name, Genre, Point of View (POV), Narrative Tense, Language, Target Word Count,** and **Premise**.
+
+*   **Synchronization:** Modifying details inside the Settings Modal instantly regenerates and updates `Project.json` in the Story Bible Workspace, maintaining a cohesive writing environment.
+
+#### **Onboarding & Configuration Flow:**
+![Onboarding Flow](./assets/onboarding_flow.webp)
+
+---
+
+### 2. 🪄 Staged AI Scene Beat Prose Writer
+Our signature feature isolates the writing process into structured beat cards. By inserting a scene beat marker in the text editor via the command menu, writers specify narrative instructions, length constraints (200, 400, or 600 words), and beat categories (e.g. *Action*, *Reaction*, or *Dialogue*).
+
+*   **Staged AI Preview:** Prose is generated and staged inside the beat card block first, allowing users to review before making permanent modifications to the document.
+*   **Context Scrubber (`stripBeatAnchors`):** Automatically filters out nested tags of surrounding beat markers before feeding the text to the LLM, keeping the context clean.
+*   **Transactional Actions:**
+    *   **Apply:** Seamlessly inserts the generated prose beneath the beat node in the manuscript and marks the card as completed (`done`).
+    *   **Retry:** Clears the previous output and requests a fresh draft from the LLM.
+    *   **Discard:** Reverts the card back to its edit/pending state to allow adjustment of description parameters.
+
+#### **Reviewing & Staged Draft Controls:**
+![Staged AI Generation](./assets/staged_beat_generation.webp)
+
+---
+
+### 3. 📖 Unified Story Bible Workspace
+The visual editor encapsulates three comprehensive context layers:
+*   **Project Settings (`Project.json`)**: Tracks key-value attributes (Genre, Tense, POV, Language) to dynamically feed tone/speech filters to the LLM prompts.
+*   **Voice Style Guides (`Style.md`)**: User-customizable style guides. Includes a built-in AI Style Capture helper that extracts guidelines from pasted text.
+*   **Character Profiles (`Characters.json`)**: Tracks character motivations, features, and dialogues with dynamic card layouts and AI-captured profile parsing.
+
+#### **Story Bible Settings View:**
+![Story Bible Workspace](./assets/story_bible_workspace.png)
 
 ---
 
 ## ⚡ Getting Started
 
 ### 1. Installation
-Install all monorepo dependencies and link local workspaces:
+Install all monorepo workspace dependencies and establish symlinks:
 ```bash
 npm install
 ```
 
-### 2. Configure Environment & LLM Credentials
+### 2. Run Locally
 
-The CLI REPL supports loading your LLM credentials from two different sources, giving you complete flexibility:
+Manage both development layers directly from the root workspace folder:
 
-#### 📂 Option A: Portable `config.json` inside your project folder (Recommended)
-You can create a `config.json` directly in your active project directory (e.g., `project-1/config.json`). This keeps configuration settings portable and cleanly compartmentalized within each individual story:
-```json
-{
-  "apiKey": "your-openai-api-key",
-  "apiUrl": "https://api.openai.com/v1",
-  "model": "gpt-4o"
-}
-```
-
+| Command | Action | URL / Console |
+| :--- | :--- | :--- |
+| **`npm run dev`** | Starts the Next.js visual editor dashboard (Turbopack) | `http://localhost:3000` |
+| **`npm run cli`** | Launches the terminal-based interactive REPL | CLI Console |
+| **`npm run test`** | Executes all unit and integration regression suites | Local Compilers |
 
 ---
 
-## 🚀 Development Workflow
+## 🌍 Creating Custom Language Packs
 
-Manage the entire workspace from the root folder using standard proxy scripts:
+AI task templates, speech constraints, and dialogue metrics can be localized to fit custom languages:
 
-| Command | Action | Location |
-| :--- | :--- | :--- |
-| **`npm run dev`** | Starts the Next.js visual editor dev server (Turbopack) | `http://localhost:3000` |
-| **`npm run cli`** | Launches the interactive terminal writing agent REPL | Terminal console |
-| **`npm run test`** | Executes all unit and integration test suites in workspaces | Local compilers |
-
-
-
-## 🌍 Adding Custom Language Packs
-
-You can easily localise the AI writing instructions (such as dialogue register constraints, pronoun pairs, formatting outputs, and narrative task descriptions) by adding your own language pack:
-
-1. **Create a JSON config** under [`packages/novel-agent/src/language/packs/`](./packages/novel-agent/src/language/packs/) (e.g. `es.json` for Spanish or `ja.json` for Japanese).
-2. **Translate the Action Prompt Templates** (`continue_writing`, `rewrite_selection`, `improve_dialogue`, etc.) inside that JSON file.
-3. **Register the pack** inside [`packages/novel-agent/src/language/languagePackSchema.ts`](./packages/novel-agent/src/language/languagePackSchema.ts):
+1. Add a localized JSON pack inside [`packages/novel-agent/src/language/packs/`](./packages/novel-agent/src/language/packs/) (e.g., `es.json` for Spanish).
+2. Translate all task guides (`continue_writing`, `rewrite_selection`, `improve_dialogue`).
+3. Register your language pack in [`packages/novel-agent/src/language/languagePackSchema.ts`](./packages/novel-agent/src/language/languagePackSchema.ts):
    ```typescript
    import esPackJson from "./packs/es.json";
-   
    export const ES_PACK = esPackJson as LanguagePack;
    
    export function loadLanguagePack(lang: string): LanguagePack {
-     if (lang === "vi") return VI_PACK;
      if (lang === "es") return ES_PACK;
      return EN_PACK;
    }
    ```
-4. Update the `"language": "es"` string in your project manifest (`Novelwrite.json`) to automatically load your custom localized rules across all AI operations!
+4. Set `"language": "es"` in the settings or `Project.json` to immediately propagate localized rules across all editor AI behaviors!
 
 ---
 
-## 🧪 Testing and Quality Control
+## 🧪 Testing and Regression Suite
 
-Run Vitest regression tests to verify that your prompts, storage adapters, and builders remain fully functional:
+Ensure all adapters, parsers, and prompt compilers are fully operational by running Vitest suites:
 ```bash
-# Test packages/novel-agent only
-npx vitest run packages/novel-agent
 
 # Test apps/webapp only
 npx vitest run apps/webapp
