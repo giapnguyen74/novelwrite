@@ -4,17 +4,17 @@ Welcome to **NovelWrite**, a premium, highly immersive novel-writing ecosystem f
 
 ---
 
-## 🗺️ Monorepo Architecture
+## 🗺️ Architecture
 
 `NovelWrite` is structured as a type-safe npm workspaces monorepo:
 
 ```mermaid
 graph TD
-    A[apps/novelwrite-cli] -->|Imports| C[@novelwrite/novel-agent]
-    B[apps/webapp Next.js] -->|Imports| C
+    A["apps/novelwrite-cli"] -->|Imports| C["@novelwrite/novel-agent"]
+    B["apps/webapp Next.js"] -->|Imports| C
     
-    C -->|ProjectStorage Interface| D[Storage Abstraction]
-    C -->|LLMClient Interface| E[LLM Abstraction]
+    C -->|ProjectStorage Interface| D["Storage Abstraction"]
+    C -->|LLMClient Interface| E["LLM Abstraction"]
     
     A -->|Implements DirectoryProjectStorage| D
     B -->|Implements LocalStorageProjectStorage| D
@@ -25,15 +25,12 @@ The core library that handles AI prompt construction, dynamic context parsing, a
 *   **Decoupled Storage (`ProjectStorage`)**: Dual filesystem adapter interface to read/write files either in Node (CLI console) or local storage (React browser).
 *   **Dynamic Language Packs**: Keeps dynamic instructions, narrative models, and speech guides localized inside JSON files under [`packages/novel-agent/src/language/packs/`](./packages/novel-agent/src/language/packs/).
 
-### 2. 💻 [`apps/novelwrite-cli`](./apps/novelwrite-cli) (Interactive Writing CLI REPL)
-An interactive console shell enabling authors to query styles, rewrite selected paragraphs, and prompt the AI writer directly from their terminal.
-
-### 3. 🎨 [`apps/webapp`](./apps/webapp) (Next.js Rich-Text Workspace Dashboard)
+### 2. 🎨 [`apps/webapp`](./apps/webapp) (Next.js Rich-Text Workspace Dashboard)
 A responsive visual editor incorporating customizable Tiptap nodes, real-time word-counting, and a comprehensive Story Bible.
 
 ---
 
-## ✨ Flagship Visual Features
+## ✨ Visual Features
 
 ### 1. 🚀 First-Time Project Onboarding & Settings
 When launched with no prior project data, `NovelWrite` triggers an elegant setup dialog immediately on startup. Authors can initialize their work by defining the **Story Title, Author Name, Genre, Point of View (POV), Narrative Tense, Language, Target Word Count,** and **Premise**.
