@@ -1,0 +1,67 @@
+{
+  "language": "vi",
+  "name": "Tiếng Việt (Vietnamese)",
+  "globalRules": {
+    "outputLanguage": "Vietnamese",
+    "preserveRegister": true,
+    "avoidTranslationese": true,
+    "preserveSocialPronouns": true
+  },
+  "registerSchema": {
+    "pronounPairs": ["anh/em", "mày/tao", "tôi/cậu", "tôi/anh", "ta/ngươi", "ông/tôi", "bà/tôi", "chị/em", "con/mẹ", "con/bố"],
+    "dialogueParticles": ["nhỉ", "nhé", "a", "dạ", "ư", "hả", "sao", "đi", "nào"],
+    "dialectFields": ["Bắc", "Trung", "Nam"]
+  },
+  "actionPrompts": {
+    "continue_writing": {
+      "task": "Viết tiếp câu chuyện một cách tự nhiên từ trạng thái con trỏ hiện tại.",
+      "rules": "1. Viết tiếp nối liền mạch từ trạng thái cốt truyện hiện tại.\n2. Giữ nguyên góc nhìn (POV), thì, giọng văn và nhịp độ từ ngữ cảnh.\n3. Sử dụng Characters.md để giữ cho động cơ, mối quan hệ và cách xưng hô của nhân vật nhất quán.\n4. Sử dụng trí nhớ Continuity.md để tránh các mâu thuẫn cốt truyện.\n5. Không giải quyết xung đột quá nhanh.\n6. Không tự tiện bịa đặt các tình tiết cốt lõi trừ khi được yêu cầu.\n7. Viết khoảng 150 từ.",
+      "outputFormat": "Chỉ trả về phần văn bản viết tiếp của câu chuyện. Không kèm theo lời bình luận, nhãn dán, giải thích, ký hiệu khung markdown hoặc dấu ngoặc kép bên ngoài."
+    },
+    "rewrite_selection": {
+      "task": "Viết lại đoạn văn được chọn dựa trên hướng dẫn của tác giả.",
+      "rules": "1. Giữ nguyên diễn biến cốt truyện chính, các chi tiết hành động và vị trí nhân vật.\n2. Áp dụng nghiêm ngặt hướng dẫn phong cách từ Style.md vào văn phong, mô tả và nhịp độ.\n3. Khớp chính xác thông tin nhân vật từ Characters.md.\n4. Không phát minh ra các sự kiện mới trừ khi được yêu cầu.\n5. Độ dài tương đương đoạn văn gốc trừ khi có chỉ thị khác.",
+      "outputFormat": "Chỉ trả về đoạn văn đã viết lại. Không bao gồm bình luận, giải thích, khung markdown hoặc dấu ngoặc kép."
+    },
+    "expand_selection": {
+      "task": "Thêm chiều sâu, không khí, nội tâm, chi tiết giác quan hoặc ẩn ý vào đoạn văn được chọn.",
+      "rules": "1. Giữ nguyên hướng đi của cốt truyện gốc.\n2. Tăng thêm chiều sâu mô tả hoặc dòng suy nghĩ nhân vật mà không làm thay đổi các sự kiện cốt lõi.\n3. Không đưa thêm các tình tiết chính mới trừ khi được yêu cầu.\n4. Giữ vững góc nhìn nhân vật (POV) và giọng điệu đặc trưng.",
+      "outputFormat": "Chỉ trả về đoạn văn đã mở rộng. Không kèm theo lời bình luận, giải thích hay khung markdown."
+    },
+    "tighten_selection": {
+      "task": "Thu gọn và làm sắc nét đoạn văn được chọn để tăng tốc độ nhịp diễn tiến hoặc làm câu chữ cô đọng hơn.",
+      "rules": "1. Loại bỏ các từ ngữ rườm rà, câu bị động, lặp từ hoặc mô tả trùng lặp.\n2. Bảo toàn toàn bộ chuỗi sự kiện và thông tin cốt lõi.\n3. Giữ nguyên giọng điệu nhân vật từ Characters.md.",
+      "outputFormat": "Chỉ trả về đoạn văn đã thu gọn. Không kèm theo bình luận hoặc giải thích."
+    },
+    "improve_dialogue": {
+      "task": "Chỉnh sửa và chau chuốt các đoạn hội thoại trong phần được chọn để nghe tự nhiên, đặc trưng và có sức nặng.",
+      "rules": "1. Đảm bảo phong cách nói chuyện riêng biệt khớp với tính cách nhân vật trong Characters.md.\n2. Sử dụng đại từ xưng hô (anh/em, tôi/cậu, ta/ngươi, con/bố...) chính xác theo ngữ cảnh xã hội Việt Nam.\n3. Giữ cho hội thoại giàu ẩn ý, chủ động và biểu cảm.\n4. Không thay đổi phần tự sự xung quanh trừ khi cần thiết để hỗ trợ thoại mới.",
+      "outputFormat": "Chỉ trả về đoạn văn có hội thoại đã chau chuốt. Không bao gồm lời dẫn hay giải thích."
+    },
+    "extract_style": {
+      "task": "Trích xuất một hồ sơ phong cách và giọng văn có cấu trúc từ mẫu văn xuôi hoặc ghi chú của người dùng.",
+      "rules": "1. Chuyển đổi các tùy chọn phong cách mơ hồ thành hướng dẫn viết cụ thể, thực tế.\n2. Không bắt chước nguyên văn các tác phẩm có bản quyền.\n3. Mô tả chi tiết nhịp điệu câu, phong cách tả cảnh, tả thực, đối thoại, nhịp độ và những điều cần tránh.\n4. Đảm bảo cấu trúc đầu ra rõ ràng để áp dụng cho các prompt viết truyện tiếp theo.",
+      "outputFormat": "Trả về toàn bộ nội dung Style.md cập nhật theo cấu trúc sau:\n\n# Style\n\n## Style Summary\n\n## Sentence Rhythm\n\n## Description Style\n\n## Dialogue Style\n\n## Emotional Style\n\n## Pacing\n\n## Preferred Techniques\n\n## Avoid\n\n## Reference Influences\n\n## Extracted Voice Notes\n\n## Sample Passage"
+    },
+    "capture_characters": {
+      "task": "Trích xuất thông tin nhân vật từ văn bản nguồn và định dạng thành danh sách JSON có cấu trúc.",
+      "rules": "1. Chỉ trích xuất thông tin liên quan đến nhân vật.\n2. Loại bỏ trùng lặp nhân vật theo tên.\n3. Thu thập biệt danh, đặc điểm, vai trò, trạng thái, tuổi tác, ngoại hình, giọng nói, mong muốn cốt lõi, nỗi sợ cốt lõi, các mối quan hệ và bí mật.\n4. Không bao gồm lời dẫn hoặc văn bản xung quanh, chỉ cần mảng JSON thô bên trong khối markdown.",
+      "outputFormat": "Chỉ trả về một mảng JSON khớp với cấu trúc Character. Ví dụ:\n[\n  {\n    \"name\": \"Sarah Vance\",\n    \"aliases\": [\"Sarah\", \"Vance\"],\n    \"role\": \"protagonist\",\n    \"appearance\": \"Scarred ex-sailor...\",\n    \"traits\": [\"stoic\", \"stubborn\"],\n    \"secrets\": [\"Fear of open ocean\"]\n  }\n]"
+    },
+    "summarize_continuity": {
+      "task": "Tạo mới hoặc cập nhật dòng thời gian, diễn biến cốt truyện, sự thật và các nút thắt chưa giải quyết trong Continuity.md.",
+      "rules": "1. Chỉ tóm tắt những diễn biến truyện đã được chấp thuận.\n2. Giữ cho bộ nhớ mạch truyện ngắn gọn, cô đọng.\n3. Theo dõi sát sao dòng thời gian, thay đổi quan hệ và rủi ro mâu thuẫn tình tiết.\n4. Không viết lại văn xuôi hay thay đổi Style.md.",
+      "outputFormat": "Trả về toàn bộ nội dung Continuity Memory cập nhật theo cấu trúc sau:\n\n# Continuity Memory\n\n## Full Story Summary\n\n## Chapter Summaries\n\n## Timeline\n\n## Plot Progress\n\n## Confirmed Facts\n\n## Character State Changes\n\n## Relationship Changes\n\n## World / Setting Facts\n\n## Open Questions\n\n## Unresolved Threads\n\n## Continuity Risks"
+    },
+    "check_continuity": {
+      "task": "Phân tích văn bản được chọn đối chiếu với Project.md, Characters.md và Continuity.md để phát hiện các điểm bất thường, xung đột thời gian hoặc hành vi nhân vật bất nhất.",
+      "rules": "1. Đối chiếu các tình tiết với ràng buộc cốt lõi trong Project.md.\n2. Chỉ ra các bất cập về cách xưng hô hoặc tính cách nhân vật đối chiếu với Characters.md.\n3. Đánh giá mức độ nghiêm trọng (Cao - xung đột trực tiếp, Trung bình - rủi ro logic, Thấp - lỗi diễn đạt).\n4. Đề xuất phương án sửa đổi mang tính xây dựng.",
+      "outputFormat": "Trả về báo cáo phân tích với các phần sau:\n\n# Continuity Analysis Report\n\n## High Priority Issues (Direct Clashes)\n\n## Medium Priority Issues (Subtle Risks)\n\n## Minor Issues & Suggestions\n\n## Stylistic Voice Consistency Checks"
+    },
+    "beat_write": {
+      "task": "Viết văn xuôi sinh động thể hiện chính xác mục tiêu của beat cảnh quay được chỉ định.",
+      "rules": "1. Viết từ 1 đến 3 đoạn văn xuôi tự sự chất lượng cao.\n2. Tập trung thể hiện đúng mô tả của beat và ý đồ nghệ thuật được yêu cầu.\n3. Giữ nguyên góc nhìn (POV), thì, giọng văn, nhịp độ và phong cách nghệ thuật từ Style.md.\n4. Giữ cho động cơ, mối quan hệ và cách xưng hô của nhân vật nhất quán theo Characters.md.\n5. Kết nối mạch lạc, chuyển cảnh tự nhiên giữa phần văn bản phía trước và phía sau.",
+      "outputFormat": "Chỉ trả về phần văn bản câu chuyện được tạo. Không kèm theo lời bình luận, giải thích, ký hiệu khung markdown hay dấu ngoặc kép."
+    }
+  }
+}

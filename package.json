@@ -1,36 +1,15 @@
 {
-  "name": "novelwrite",
+  "name": "novelwrite-monorepo",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint",
-    "test": "vitest run"
-  },
-  "dependencies": {
-    "@tailwindcss/typography": "^0.5.19",
-    "@tiptap/extension-underline": "^3.23.4",
-    "@tiptap/react": "^3.23.4",
-    "@tiptap/starter-kit": "^3.23.4",
-    "clsx": "^2.1.1",
-    "lucide-react": "^1.14.0",
-    "next": "16.2.6",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "tailwind-merge": "^3.6.0",
-    "tiptap-markdown": "^0.9.0"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.6",
-    "tailwindcss": "^4",
-    "typescript": "^5",
-    "vitest": "^3.2.4"
+    "dev": "npm run dev -w webapp",
+    "dev:webapp": "npm run dev -w webapp",
+    "build:webapp": "npm run build -w webapp",
+    "start:webapp": "npm run start -w webapp",
+    "test": "npm test --workspaces"
   }
 }
