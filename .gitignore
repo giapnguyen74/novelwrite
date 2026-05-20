@@ -45,3 +45,10 @@ next-env.d.ts
 /design
 /features
 
+# next.js
+/.next/
+/out/
+
+
+
+
